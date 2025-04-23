@@ -33,6 +33,9 @@ app.use('/api/compliance', complianceRoutes);
 app.get('/', (req, res) => {
   res.send('Angelclass API is running');
 });
+app.get('/test', (req, res) => {
+  res.json({ message: 'Rota funcionando!' });
+});
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/angelclass')
@@ -45,3 +48,4 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/angelclass'
   .catch(err => {
     console.error('MongoDB connection error:', err);
   });
+
