@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 app.get('/test', (req, res) => {
   res.json({ message: 'Rota funcionando!' });
 });
-const Test = require('./models/Test');  // Importa o Model
+const Test = require('./models/Test');  // Corretamente apontando para o modelo Test
 
 // Rota de teste do banco de dados
 app.get('/test-db', async (req, res) => {
