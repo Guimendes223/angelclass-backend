@@ -36,6 +36,25 @@ app.get('/', (req, res) => {
 app.get('/test', (req, res) => {
   res.json({ message: 'Rota funcionando!' });
 });
+const Test = require('./models/Test');  // Importa o Model
+
+// Rota de teste do banco de dados
+app.get('/test-db', async (req, res) => {
+  try {
+    // Cria um novo documento e salva no banco
+    const testItem = new Test({ name: 'Banco funcionando' });
+    await testItem.save(); // Salva o item no banco de dados
+
+    // Consulta todos os itens salvos no banco
+    const allTests = await Test.find(); // Busca todos os documentos da coleção 'Test'
+
+    // Envia a resposta com os dados do banco
+    res.json(allTests);  // Retorna a lista de itens
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao conectar ao banco' });  // Se houver erro, retorna uma mensagem
+  }
+});
+
 
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/angelclass')
